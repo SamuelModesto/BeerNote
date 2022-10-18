@@ -17,7 +17,8 @@
 - [Contato](#Contato)
 
 ## Sobre o Projeto
-
+Swagger - http://localhost:8080/beerNote/swagger-ui.html#/
+Eureka - http://localhost:8761
 ### Arquitetura
 
 ## Iniciando
