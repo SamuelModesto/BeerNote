@@ -10,7 +10,7 @@ spring:
         - id: beerNote
           uri: lb://BEERNOTE
           predicates:
-            - Path=/beernote/**
+            - Path=/beerNote/**
 
 
 eureka:
