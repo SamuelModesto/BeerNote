@@ -11,6 +11,10 @@ spring:
           uri: lb://BEERNOTE
           predicates:
             - Path=/beerNote/**
+        - id: pessoas
+          uri: lb://PESSOAS
+          predicates:
+            - Path=/pessoas/**
 
 
 eureka:
