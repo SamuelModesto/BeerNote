@@ -1,12 +1,19 @@
 package com.unipampa.Pessoas.model;
 
 
-import javax.persistence.*;
 import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "pessoas")
-public class Pessoas implements Serializable {
+public class Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,7 +30,15 @@ public class Pessoas implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
+    public Pessoa(){
 
+    }
+    public Pessoa(Long id, String name, String user, String password) {
+        this.id = id;
+        this.name = name;
+        this.user = user;
+        this.password = password;
+    }
 
     public void setId(Long id) {
         this.id = id;

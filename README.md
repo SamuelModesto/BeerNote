@@ -17,7 +17,8 @@
 - [Contato](#Contato)
 
 ## Sobre o Projeto
-Swagger - http://localhost:8080/beerNote/swagger-ui.html#/
+Swagger(Pessoas) - http://localhost:8080/pessoas/swagger-ui.html#/
+Swagger(Cervejas) - http://localhost:8080/beerNote/swagger-ui.html#/
 Eureka - http://localhost:8761
 ### Arquitetura
 
