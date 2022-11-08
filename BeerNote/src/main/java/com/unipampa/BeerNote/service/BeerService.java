@@ -3,7 +3,6 @@ package com.unipampa.BeerNote.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.unipampa.BeerNote.model.Beer;
@@ -17,6 +16,11 @@ public class BeerService {
 
     public List<Beer> listAllBeer() {
         return beerRepository.findAll();
+        // var beers = beerRepository.findAll();
+        // beers.stream().forEach(b -> {
+        // b.add(linkTo(methodOn(BeerController.class).findById(b.getId())).withSelfRel());
+        // });
+        // return beers;
     }
 
     public Beer listById(Integer id) {
