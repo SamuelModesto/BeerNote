@@ -85,7 +85,4 @@ public class BeerVO extends RepresentationModel<BeerVO> implements Serializable 
         return true;
     }
 
-    public void add(WebMvcLinkBuilder linkTo) {
-    }
-
 }
