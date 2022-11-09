@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.unipampa.BeerNote.model.Beer;
+import com.unipampa.BeerNote.data.BeerVO;
 import com.unipampa.BeerNote.service.BeerService;
 import com.unipampa.BeerNote.utils.MediaType;
 
@@ -40,7 +40,7 @@ public class BeerController {
                         @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
                         @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
         })
-        public List<Beer> listAllBeer() {
+        public List<BeerVO> listAllBeer() {
                 return beerService.listAllBeer();
         }
 
@@ -52,7 +52,7 @@ public class BeerController {
                         @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
                         @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
         })
-        public Beer findById(@PathVariable(name = "id") Integer id) {
+        public BeerVO findById(@PathVariable(name = "id") Integer id) {
                 return beerService.listById(id);
         }
 
@@ -66,7 +66,7 @@ public class BeerController {
                         @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
                         @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
         })
-        public Beer saveBeer(@RequestBody Beer beer) {
+        public BeerVO saveBeer(@RequestBody BeerVO beer) {
                 return beerService.saveBeer(beer);
         }
 
@@ -80,8 +80,8 @@ public class BeerController {
                         @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
                         @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
         })
-        public Beer updateBeer(@RequestBody Beer beer) {
-                return beerService.saveBeer(beer);
+        public BeerVO updateBeer(@RequestBody BeerVO beer) {
+                return beerService.updateBeer(beer);
         }
 
         @DeleteMapping(value = "/{id}")

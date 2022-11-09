@@ -15,6 +15,7 @@
 	<description>Projeto para avaliação de cervejas</description>
 	<properties>
 		<java.version>11</java.version>
+		<dozer.version>6.4.0</dozer.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -50,6 +51,12 @@
 			<artifactId>
 				spring-cloud-starter-netflix-eureka-client
 			</artifactId>
+		</dependency>
+
+		<dependency>
+		    <groupId>com.github.dozermapper</groupId>
+		    <artifactId>dozer-core</artifactId>
+		    <version>${dozer.version}</version>
 		</dependency>
 
 		<dependency>
