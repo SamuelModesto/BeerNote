@@ -2,21 +2,34 @@ package com.unipampa.BeerNote.data;
 
 import java.io.Serializable;
 
-public class BeerVO implements Serializable {
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.github.dozermapper.core.Mapping;
+
+@JsonPropertyOrder({ "id", "name", "description" })
+public class BeerVO extends RepresentationModel<BeerVO> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    @JsonProperty("id")
+    @Mapping("id")
+    private Integer key;
 
     private String name;
 
     private String description;
 
-    public Integer getId() {
-        return id;
+    public BeerVO() {
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Integer getKey() {
+        return key;
+    }
+
+    public void setKey(Integer key) {
+        this.key = key;
     }
 
     public String getName() {
@@ -38,8 +51,8 @@ public class BeerVO implements Serializable {
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        int result = super.hashCode();
+        result = prime * result + ((key == null) ? 0 : key.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((description == null) ? 0 : description.hashCode());
         return result;
@@ -49,15 +62,15 @@ public class BeerVO implements Serializable {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (obj == null)
+        if (!super.equals(obj))
             return false;
         if (getClass() != obj.getClass())
             return false;
         BeerVO other = (BeerVO) obj;
-        if (id == null) {
-            if (other.id != null)
+        if (key == null) {
+            if (other.key != null)
                 return false;
-        } else if (!id.equals(other.id))
+        } else if (!key.equals(other.key))
             return false;
         if (name == null) {
             if (other.name != null)
