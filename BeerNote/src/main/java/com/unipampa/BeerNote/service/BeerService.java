@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
 
+import com.unipampa.BeerNote.controller.BeerController;
 import com.unipampa.BeerNote.data.BeerVO;
 import com.unipampa.BeerNote.exceptions.ResourceNotFoundException;
 import com.unipampa.BeerNote.model.Beer;
@@ -22,18 +25,25 @@ public class BeerService {
 
     public List<BeerVO> listAllBeer() {
         logger.info("Finding Beers");
-        return DozerMapper.parseListObjects(beerRepository.findAll(), BeerVO.class);
+        var beers = DozerMapper.parseListObjects(beerRepository.findAll(), BeerVO.class);
+        beers.stream().forEach(p -> {
+            try {
+                p.add(linkTo(methodOn(BeerController.class).findById(p.getKey())).withSelfRel());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return beers;
     }
 
     public BeerVO listById(Integer id) {
         logger.info("Finding a Beer");
-        Beer entity;
-        try {
-            entity = beerRepository.findById(id);
-        } catch (Exception e) {
-            throw new ResourceNotFoundException("Beer not found");
-        }
-        return DozerMapper.parseObject(entity, BeerVO.class);
+        Beer entity = beerRepository.findById(id);
+
+        var vo = DozerMapper.parseObject(entity, BeerVO.class);
+        vo.add(linkTo(methodOn(BeerController.class).findById(id)).withSelfRel());
+
+        return vo;
     }
 
     public BeerVO saveBeer(BeerVO beerVO) {
@@ -42,18 +52,19 @@ public class BeerService {
         Beer entity = DozerMapper.parseObject(beerVO, Beer.class);
 
         BeerVO vo = DozerMapper.parseObject(beerRepository.save(entity), BeerVO.class);
-
+        vo.add(linkTo(methodOn(BeerController.class).findById(vo.getKey())).withSelfRel());
         return vo;
     }
 
     public BeerVO updateBeer(BeerVO beerVO) {
         logger.info("Updating Beer");
-        Beer entity = beerRepository.findById(beerVO.getId());
+        Beer entity = beerRepository.findById(beerVO.getKey());
 
         entity.setName(beerVO.getName());
         entity.setDescription(beerVO.getDescription());
 
         BeerVO vo = DozerMapper.parseObject(beerRepository.save(entity), BeerVO.class);
+        vo.add(linkTo(methodOn(BeerController.class).findById(vo.getKey())).withSelfRel());
         return vo;
     }
 
