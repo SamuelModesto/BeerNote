@@ -46,14 +46,10 @@ public class BeerService {
         return vo;
     }
 
-    public BeerVO saveBeer(BeerVO beerVO) {
+    public Beer saveBeer(Beer beer) {
         logger.info("Creating a Beer");
 
-        Beer entity = DozerMapper.parseObject(beerVO, Beer.class);
-
-        BeerVO vo = DozerMapper.parseObject(beerRepository.save(entity), BeerVO.class);
-        vo.add(linkTo(methodOn(BeerController.class).findById(vo.getKey())).withSelfRel());
-        return vo;
+        return beerRepository.save(beer);
     }
 
     public BeerVO updateBeer(BeerVO beerVO) {

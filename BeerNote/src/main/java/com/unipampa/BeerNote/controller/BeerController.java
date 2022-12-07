@@ -2,7 +2,11 @@ package com.unipampa.BeerNote.controller;
 
 import java.util.List;
 
+import com.unipampa.BeerNote.dto.BeerDto;
+import com.unipampa.BeerNote.model.Beer;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,16 +28,15 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping(value = "/api/v1/beer")
+@RequestMapping(value = "/api/beer")
 @CrossOrigin(origins = "*")
 @Api(value = "API REST Cervejas")
 public class BeerController {
 
         @Autowired
-        BeerService beerService;
+        private BeerService beerService;
 
-        @GetMapping(value = "", produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML,
-                        MediaType.APPLICATION_YML })
+        @GetMapping(value = "")
         @ApiOperation(value = "Retorna uma lista de cerveja")
         @ApiResponses(value = {
                         @ApiResponse(code = 200, message = "Retornou uma lista de cervejas"),
@@ -44,8 +47,7 @@ public class BeerController {
                 return beerService.listAllBeer();
         }
 
-        @GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML,
-                        MediaType.APPLICATION_YML })
+        @GetMapping(value = "/{id}")
         @ApiOperation(value = "Retorna uma cerveja")
         @ApiResponses(value = {
                         @ApiResponse(code = 200, message = "Pesquisou por id e retornou uma cerveja"),
@@ -56,24 +58,20 @@ public class BeerController {
                 return beerService.listById(id);
         }
 
-        @PostMapping(value = "", produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML,
-                        MediaType.APPLICATION_YML }, consumes = { MediaType.APPLICATION_JSON,
-                                        MediaType.APPLICATION_XML,
-                                        MediaType.APPLICATION_YML })
+        @PostMapping(value = "")
         @ApiOperation(value = "Cadastro de cerveja")
-        @ApiResponses(value = {
-                        @ApiResponse(code = 200, message = "Cadastrou uma cerveja"),
-                        @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-                        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-        })
-        public BeerVO saveBeer(@RequestBody BeerVO beer) {
-                return beerService.saveBeer(beer);
+//        @ApiResponses(value = {
+//                        @ApiResponse(code = 200, message = "Cadastrou uma cerveja"),
+//                        @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+//                        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+//        })
+        public ResponseEntity<Beer> saveBeer(@RequestBody BeerDto dto) {
+                var beer = new Beer();
+                BeanUtils.copyProperties(dto, beer);
+                return ResponseEntity.status(HttpStatus.CREATED).body(beerService.saveBeer(beer));
         }
 
-        @PutMapping(value = "", produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML,
-                        MediaType.APPLICATION_YML }, consumes = { MediaType.APPLICATION_JSON,
-                                        MediaType.APPLICATION_XML,
-                                        MediaType.APPLICATION_YML })
+        @PutMapping(value = "")
         @ApiOperation(value = "Atualiza as informações de uma cerveja")
         @ApiResponses(value = {
                         @ApiResponse(code = 200, message = "Atualizou uma cerveja"),
