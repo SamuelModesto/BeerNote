@@ -1,5 +1,6 @@
 package com.unipampa.BeerNote.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "beer")
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Beer implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -22,10 +24,10 @@ public class Beer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 250)
     private String description;
 
     @Override

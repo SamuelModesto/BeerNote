@@ -25,6 +25,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import javax.swing.text.html.Option;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/beer")
@@ -48,7 +49,7 @@ public class BeerController {
 
         @PostMapping(value = "")
         @ApiOperation(value = "Cadastro de cerveja")
-        public ResponseEntity<Beer> saveBeer(@RequestBody BeerDto dto) {
+        public ResponseEntity<Beer> saveBeer(@RequestBody @Valid BeerDto dto) {`
                 var beer = new Beer();
                 BeanUtils.copyProperties(dto, beer);
                 return ResponseEntity.status(HttpStatus.CREATED).body(beerService.saveBeer(beer));
