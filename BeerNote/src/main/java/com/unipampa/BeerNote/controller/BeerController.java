@@ -49,7 +49,7 @@ public class BeerController {
 
         @PostMapping(value = "")
         @ApiOperation(value = "Cadastro de cerveja")
-        public ResponseEntity<Beer> saveBeer(@RequestBody @Valid BeerDto dto) {`
+        public ResponseEntity<Beer> saveBeer(@RequestBody @Valid BeerDto dto) {
                 var beer = new Beer();
                 BeanUtils.copyProperties(dto, beer);
                 return ResponseEntity.status(HttpStatus.CREATED).body(beerService.saveBeer(beer));
