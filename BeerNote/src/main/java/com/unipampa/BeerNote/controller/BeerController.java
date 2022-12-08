@@ -1,6 +1,7 @@
 package com.unipampa.BeerNote.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.unipampa.BeerNote.dto.BeerDto;
 import com.unipampa.BeerNote.model.Beer;
@@ -18,14 +19,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.unipampa.BeerNote.data.BeerVO;
 import com.unipampa.BeerNote.service.BeerService;
-import com.unipampa.BeerNote.utils.MediaType;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+
+import javax.swing.text.html.Option;
 
 @RestController
 @RequestMapping(value = "/api/beer")
@@ -36,61 +35,48 @@ public class BeerController {
         @Autowired
         private BeerService beerService;
 
-        @GetMapping(value = "")
-        @ApiOperation(value = "Retorna uma lista de cerveja")
-        @ApiResponses(value = {
-                        @ApiResponse(code = 200, message = "Retornou uma lista de cervejas"),
-                        @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-                        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-        })
-        public List<BeerVO> listAllBeer() {
+        @GetMapping(value = "/all")
+        public List<Beer> listAllBeer() {
                 return beerService.listAllBeer();
         }
 
         @GetMapping(value = "/{id}")
         @ApiOperation(value = "Retorna uma cerveja")
-        @ApiResponses(value = {
-                        @ApiResponse(code = 200, message = "Pesquisou por id e retornou uma cerveja"),
-                        @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-                        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-        })
-        public BeerVO findById(@PathVariable(name = "id") Integer id) {
-                return beerService.listById(id);
+        public ResponseEntity<Beer> findById(@PathVariable(name = "id") Integer id) {
+                return ResponseEntity.status(HttpStatus.OK).body(beerService.listById(id).get());
         }
 
         @PostMapping(value = "")
         @ApiOperation(value = "Cadastro de cerveja")
-//        @ApiResponses(value = {
-//                        @ApiResponse(code = 200, message = "Cadastrou uma cerveja"),
-//                        @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-//                        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-//        })
         public ResponseEntity<Beer> saveBeer(@RequestBody BeerDto dto) {
                 var beer = new Beer();
                 BeanUtils.copyProperties(dto, beer);
                 return ResponseEntity.status(HttpStatus.CREATED).body(beerService.saveBeer(beer));
         }
 
-        @PutMapping(value = "")
+        @PutMapping(value = "update/{id}")
         @ApiOperation(value = "Atualiza as informações de uma cerveja")
-        @ApiResponses(value = {
-                        @ApiResponse(code = 200, message = "Atualizou uma cerveja"),
-                        @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-                        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-        })
-        public BeerVO updateBeer(@RequestBody BeerVO beer) {
-                return beerService.updateBeer(beer);
+        public ResponseEntity<Object> updateBeer(@PathVariable Integer id, @RequestBody BeerDto dto) {
+
+                Optional<Beer> beer = beerService.listById(id);
+                if(!beer.isPresent()){
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cerveja não encontrada!");
+                }
+                var beerModel = beer.get();
+                beerModel.setDescription(dto.getDescription());
+                beerModel.setName(dto.getName());
+                beerService.updateBeer(beerModel);
+                return ResponseEntity.status(HttpStatus.OK).body("Cerveja atualizada com sucesso!");
         }
 
         @DeleteMapping(value = "/{id}")
         @ApiOperation(value = "Deleta uma cerveja por id")
-        @ApiResponses(value = {
-                        @ApiResponse(code = 200, message = "Deletou uma cerveja "),
-                        @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-                        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-        })
-        public ResponseEntity<?> deleteBeer(@PathVariable(value = "id") Integer id) {
-                beerService.deleteBeer(id);
-                return ResponseEntity.noContent().build();
+        public ResponseEntity<Object> deleteBeer(@PathVariable(value = "id") Integer id) {
+                Optional<Beer> beer = beerService.listById(id);
+                if(!beer.isPresent()){
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cerveja não encontrada!");
+                }
+                beerService.deleteBeer(beer.get());
+                return ResponseEntity.status(HttpStatus.OK).body("Cerveja deletada com sucesso!");
         }
 }
