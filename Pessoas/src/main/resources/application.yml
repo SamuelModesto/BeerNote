@@ -24,6 +24,12 @@ spring:
     username: root
     password: admin
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
 eureka:
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
@@ -31,3 +37,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
+
+pessoa:
+  rabbitmq:
+    exchange: pessoa.exchange
+    routingkey: crud.pessoa.routingkey
