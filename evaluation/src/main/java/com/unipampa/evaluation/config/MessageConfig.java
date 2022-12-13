@@ -1,4 +1,4 @@
-package com.unipampa.Pessoas.config;
+package com.unipampa.evaluation.config;
 
 import org.springframework.amqp.core.Exchange;
 import org.springframework.amqp.core.ExchangeBuilder;
@@ -23,4 +23,5 @@ public class MessageConfig {
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
+
 }

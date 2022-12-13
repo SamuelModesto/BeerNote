@@ -1,28 +1,28 @@
-package com.unipampa.Pessoas.sender;
+package com.unipampa.BeerNote.sender;
 
-import com.unipampa.Pessoas.model.Pessoa;
+import com.unipampa.BeerNote.model.Beer;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PessoaSender {
+public class BeerSender {
 
     @Value("${beer.rabbitmq.exchange}")
     String exchange;
 
     @Value("${beer.rabbitmq.routingkey}")
-    String routingKey;
+    String routingkey;
 
     public RabbitTemplate rabbitTemplate;
 
     @Autowired
-    public PessoaSender(RabbitTemplate rabbitTemplate) {
+    public BeerSender(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendMessage(Pessoa pessoa) {
-        rabbitTemplate.convertAndSend(exchange, routingKey, pessoa);
+    public void sendMessage(Beer beer) {
+        rabbitTemplate.convertAndSend(exchange, routingkey, beer);
     }
 }

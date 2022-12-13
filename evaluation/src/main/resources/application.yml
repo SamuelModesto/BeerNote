@@ -9,3 +9,20 @@ spring:
       host: localhost
       port: 27017
       database: evaluation
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+
+beer:
+  rabbitmq:
+    exchange: beer.exchange
+    queueBeer: beernote.beer.queue
+    queuePessoa: pessoas.pessoa.queue
+
+
+
+

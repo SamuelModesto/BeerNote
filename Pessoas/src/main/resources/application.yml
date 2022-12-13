@@ -1,6 +1,6 @@
 
 server:
-  port: 0
+  port: 8090
   servlet:
     context-path: '/pessoas/'
 
@@ -38,7 +38,7 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
 
-pessoa:
+beer:
   rabbitmq:
-    exchange: pessoa.exchange
-    routingkey: crud.pessoa.routingkey
+    exchange: beer.exchange
+    routingkey: pessoas.pessoa.routingkey

@@ -22,6 +22,11 @@ spring:
     url: jdbc:postgresql://localhost:5432/beerDB?useTimezone=true&serverTimezone=UTC
     username: postgres
     password: admin
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   instance:
@@ -30,3 +35,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
+
+beer:
+  rabbitmq:
+    exchange: beer.exchange
+    routingkey: beernote.beer.routingkey
