@@ -4,8 +4,35 @@ server:
     context-path: '/evaluation/'
 
 spring:
+  application:
+    name: evaluation
   data:
     mongodb:
       host: localhost
       port: 27017
       database: evaluation
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+
+beer:
+  rabbitmq:
+    exchange: beer.exchange
+    queueBeer: beernote.beer.queue
+    queuePessoa: pessoas.pessoa.queue
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+
+
+

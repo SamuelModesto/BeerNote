@@ -1,6 +1,6 @@
 
 server:
-  port: 0
+  port: 8090
   servlet:
     context-path: '/pessoas/'
 
@@ -24,6 +24,12 @@ spring:
     username: root
     password: admin
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
 eureka:
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
@@ -31,3 +37,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
+
+beer:
+  rabbitmq:
+    exchange: beer.exchange
+    routingkey: pessoas.pessoa.routingkey

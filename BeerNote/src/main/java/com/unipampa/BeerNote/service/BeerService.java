@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import com.unipampa.BeerNote.sender.BeerSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
@@ -15,8 +16,15 @@ import com.unipampa.BeerNote.repository.BeerRepository;
 @Service
 public class BeerService {
 
+    private BeerRepository beerRepository;
+
+    private BeerSender beerSender;
+
     @Autowired
-    BeerRepository beerRepository;
+    public BeerService(BeerRepository beerRepository, BeerSender beerSender) {
+        this.beerRepository = beerRepository;
+        this.beerSender = beerSender;
+    }
 
     private Logger logger = Logger.getLogger(BeerService.class.getName());
 
@@ -32,8 +40,9 @@ public class BeerService {
 
     public Beer saveBeer(Beer beer) {
         logger.info("Creating a Beer");
-
-        return beerRepository.save(beer);
+        Beer returnBeer = beerRepository.save(beer);
+        beerSender.sendMessage(beer);
+        return returnBeer;
     }
 
     public Beer updateBeer(Beer beer) {
