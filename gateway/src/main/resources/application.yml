@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: beerNote
+          uri: lb://BEERNOTE
+          predicates:
+            - Path=/beerNote/**
+        - id: pessoas
+          uri: lb://PESSOAS
+          predicates:
+            - Path=/pessoas/**
+
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

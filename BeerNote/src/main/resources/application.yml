@@ -1,0 +1,42 @@
+server:
+  port: 6465
+  servlet:
+    context-path: '/beerNote/'
+
+spring:
+  application:
+    name: beerNote
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jmx:
+    enabled: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/beerDB?useTimezone=true&serverTimezone=UTC
+    username: postgres
+    password: admin
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+beer:
+  rabbitmq:
+    exchange: beer.exchange
+    routingkey: beernote.beer.routingkey
