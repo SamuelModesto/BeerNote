@@ -24,8 +24,8 @@ O projeto BeerNote tem como objetivo ser um bloco de anotações para apreciador
       <img alt="Java-Solid" src="https://github.com/SamuelModesto/Assets/blob/master/Imagens%20BeerNote/ArquiteturaBeerNote.jpeg" />
   </a>
 </p>
-## Iniciando
 
+## Iniciando
 
 ### Como usar
 1. Os bancos de dados (MySql, Postgres, Mongo) devem ser instalados.
