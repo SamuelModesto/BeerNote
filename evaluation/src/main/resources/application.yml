@@ -11,7 +11,9 @@ spring:
       host: localhost
       port: 27017
       database: evaluation
-
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
   rabbitmq:
     host: localhost
     port: 5672

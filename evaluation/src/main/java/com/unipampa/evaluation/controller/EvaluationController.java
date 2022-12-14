@@ -7,19 +7,20 @@ import com.unipampa.evaluation.model.Person;
 import com.unipampa.evaluation.service.BeerService;
 import com.unipampa.evaluation.service.EvaluationService;
 import com.unipampa.evaluation.service.PersonService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/evaluations")
+@CrossOrigin(origins = "*")
+@Api(value = "API REST evaluation")
 public class EvaluationController {
 
     @Autowired
@@ -32,6 +33,7 @@ public class EvaluationController {
     private BeerService beerService;
 
     @PostMapping("/register")
+    @ApiOperation(value = "Faz uma avaliação de cervejas")
     public ResponseEntity<Object> registerEvaluation(@RequestBody EvaluationDto dto) {
         var evaluation = new Evaluation();
         BeanUtils.copyProperties(dto, evaluation);
