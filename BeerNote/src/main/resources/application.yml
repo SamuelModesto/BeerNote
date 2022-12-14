@@ -1,5 +1,5 @@
 server:
-  port: 6465
+  port: 0
   servlet:
     context-path: '/beerNote/'
 
