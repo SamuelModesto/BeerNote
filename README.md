@@ -17,15 +17,35 @@
 - [Contato](#Contato)
 
 ## Sobre o Projeto
-Swagger(Pessoas) - http://localhost:8080/pessoas/swagger-ui.html#/
-Swagger(Cervejas) - http://localhost:8080/beerNote/swagger-ui.html#/
-Eureka - http://localhost:8761
+O projeto BeerNote tem como objetivo ser um bloco de anotações para apreciadores de cervejas, além de poderem compartilhar as suas avaliações e ler as avaliações de outras pessoas geograficamente próximas.
 ### Arquitetura
-
+<p align="center">
+  <a href="https://github.com/SamuelModesto">
+      <img alt="Java-Solid" src="https://github.com/SamuelModesto/Assets/blob/master/Imagens%20BeerNote/ArquiteturaBeerNote.jpeg" />
+  </a>
+</p>
 ## Iniciando
 
 
 ### Como usar
+1. Os bancos de dados (MySql, Postgres, Mongo) devem ser instalados.
+2. RabbitMq precisa ser instalado.
+3. Baixar o projeto e abrir na IDE de sua preferência.
+4. Acessar o arquivo `Application.yml` para obter informações de configuração do banco de dados.
+5. Criar as filas no RabbitMQ. Para isso consultar o arquivo `Application.yml` para informações de nomes e routingKey das filas.
+6. Iniciar os serviços na seguinte ordem:
+  6.1 Eureka.
+  6.2 Gateway.
+  6.3 Pessoas.
+  6.4 BeerNote.
+  6.5 Evaluation.
+7. Acessar os links abaixo do swagger de cada serviço para executar requisições.
+
+- Swagger(Pessoas) - http://localhost:8080/pessoas/swagger-ui.html#/
+- Swagger(Cervejas) - http://localhost:8080/beerNote/swagger-ui.html#/
+- Swagger(Evaluation) - http://localhost:8080/evaluation/swagger-ui.html#/
+- Eureka - http://localhost:8761
+- Rabbitmq - http://localhost:15672/#
 
 
 ## Contribuindo
