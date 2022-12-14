@@ -1,6 +1,6 @@
 
 server:
-  port: 8090
+  port: 0
   servlet:
     context-path: '/pessoas/'
 
