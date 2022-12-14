@@ -15,6 +15,10 @@ spring:
           uri: lb://PESSOAS
           predicates:
             - Path=/pessoas/**
+        - id: evaluation
+          uri: lb://EVALUATION
+          predicates:
+            - Path=/evaluation/**
 
 
 eureka:
