@@ -23,6 +23,5 @@ public class Beer {
     @NonNull
     private String description;
 
-    @DBRef
-    private Evaluation evaluation;
+
 }

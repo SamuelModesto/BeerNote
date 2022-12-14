@@ -20,4 +20,7 @@ public class Evaluation {
 
     @DBRef
     private Person person;
+
+    @DBRef
+    private Beer beer;
 }
