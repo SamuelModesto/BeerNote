@@ -1,15 +1,13 @@
-package com.unipampa.pessoas.service;
+package com.unipampa.Pessoas.service;
 
 
-import com.fasterxml.jackson.annotation.OptBoolean;
-import com.unipampa.pessoas.model.Pessoa;
-import com.unipampa.pessoas.repository.PessoaRepository;
-import com.unipampa.pessoas.sender.PessoaSender;
+import com.unipampa.Pessoas.model.Pessoa;
+import com.unipampa.Pessoas.repository.PessoaRepository;
+import com.unipampa.Pessoas.sender.PessoaSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PessoaService  {
@@ -28,8 +26,8 @@ public class PessoaService  {
      return repository.findAll();
     }
 
-    public Optional<Pessoa> listById(long id){
-        return Optional.ofNullable(repository.findById(id));
+    public Pessoa listById(long id){
+        return repository.findById(id);
     }
 
     public Pessoa savePessoa(Pessoa pessoa) {

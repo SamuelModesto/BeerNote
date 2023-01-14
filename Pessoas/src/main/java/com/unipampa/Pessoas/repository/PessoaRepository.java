@@ -1,7 +1,7 @@
-package com.unipampa.pessoas.repository;
+package com.unipampa.Pessoas.repository;
 
 
-import com.unipampa.pessoas.model.Pessoa;
+import com.unipampa.Pessoas.model.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

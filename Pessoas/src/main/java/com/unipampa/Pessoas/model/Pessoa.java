@@ -1,4 +1,4 @@
-package com.unipampa.pessoas.model;
+package com.unipampa.Pessoas.model;
 
 
 import java.io.Serializable;

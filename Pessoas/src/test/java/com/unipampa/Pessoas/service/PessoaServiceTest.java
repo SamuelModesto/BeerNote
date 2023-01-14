@@ -1,7 +1,7 @@
-package com.unipampa.pessoas.service;
+package com.unipampa.Pessoas.service;
 
-import com.unipampa.pessoas.model.Pessoa;
-import com.unipampa.pessoas.repository.PessoaRepository;
+import com.unipampa.Pessoas.model.Pessoa;
+import com.unipampa.Pessoas.repository.PessoaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -10,7 +10,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
@@ -42,19 +41,19 @@ class PessoaServiceTest {
         iniciarObjetos();
     }
 
-//    @Test
-//    void quandoSalvarUmaPessoaRetorneSucesso() {
-//        when(repository.save(any())).thenReturn(pessoa);
-//        Pessoa response = service.savePessoa(pessoa);
-//        assertNotNull(response);
-//        assertEquals(pessoa.getClass(), response.getClass());
-//        assertEquals(ID, response.getId());
-//    }
+    @Test
+    void quandoSalvarUmaPessoaRetorneSucesso() {
+        when(repository.save(any())).thenReturn(pessoa);
+        Pessoa response = service.savePessoa(pessoa);
+        assertNotNull(response);
+        assertEquals(pessoa.getClass(), response.getClass());
+        assertEquals(ID, response.getId());
+    }
 
     @Test
     void quandoBuscarPessoaPorIdRetorneUmaInstanciaDePessoa() {
         when(repository.findById(anyLong())).thenReturn(pessoa);
-        Pessoa response = service.listById(ID).get();
+        Pessoa response = service.listById(ID);
         assertNotNull(response);
         assertEquals(pessoa.getClass(), response.getClass());
         assertEquals(ID, response.getId());

@@ -1,4 +1,4 @@
-package com.unipampa.pessoas.config;
+package com.unipampa.Pessoas.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.unipampa.pessoas"))
+                .apis(RequestHandlerSelectors.basePackage("com.unipampa.Pessoas"))
                 .paths(PathSelectors.any())
                 .build()
                 .useDefaultResponseMessages(false)
