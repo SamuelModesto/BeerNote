@@ -1,17 +1,23 @@
 package com.unipampa.pessoas.model;
 
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
 
 
 @Entity
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "pessoas")
 public class Pessoa implements Serializable {
 
@@ -30,45 +36,16 @@ public class Pessoa implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    public Pessoa(){
-
-    }
-    public Pessoa(Long id, String name, String user, String password) {
-        this.id = id;
-        this.name = name;
-        this.user = user;
-        this.password = password;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Pessoa pessoa = (Pessoa) o;
+        return id != null && Objects.equals(id, pessoa.id);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
