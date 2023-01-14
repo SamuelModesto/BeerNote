@@ -1,4 +1,4 @@
-package com.unipampa.BeerNote.controller;
+package com.unipampa.BeerNote.resource;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,14 +26,13 @@ import com.unipampa.BeerNote.service.BeerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-import javax.swing.text.html.Option;
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/beers")
 @CrossOrigin(origins = "*")
 @Api(value = "API REST Cervejas")
-public class BeerController {
+public class BeerResource {
 
         @Autowired
         private BeerService beerService;
