@@ -1,4 +1,4 @@
-package com.unipampa.Pessoas;
+package com.unipampa.pessoas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

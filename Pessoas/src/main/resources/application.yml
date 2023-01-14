@@ -2,7 +2,7 @@
 server:
   port: 0
   servlet:
-    context-path: '/pessoas/'
+    context-path: '/pessoa/'
 
 spring:
   application:
