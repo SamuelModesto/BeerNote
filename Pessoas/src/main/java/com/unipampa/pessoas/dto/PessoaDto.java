@@ -1,7 +1,6 @@
 package com.unipampa.pessoas.dto;
 
-import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
