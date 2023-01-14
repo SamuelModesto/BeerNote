@@ -56,7 +56,7 @@ public class PessoaResource {
     @PostMapping(value = "")
     @ApiOperation(value = "Cadastro de pessoa")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Cadastrou uma pessoa"),
+            @ApiResponse(code = 201, message = "Cadastrou uma pessoa"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
@@ -85,7 +85,7 @@ public class PessoaResource {
     }
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "Deleta uma pessoa por id")
+    @ApiOperation(value = "Deleta uma pessoa")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Deletou uma pessoa "),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
