@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +30,7 @@ public class PessoaResource {
     @ApiOperation(value = "Retorna uma lista de pessoas")
         @ApiResponses(value = {
                 @ApiResponse(code = 200, message = "Retornou uma lista de pessoas"),
+                @ApiResponse(code = 401, message = "Você não está autorizado na aplicação"),
                 @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
                 @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
         })
@@ -42,6 +42,7 @@ public class PessoaResource {
     @ApiOperation(value = "Retorna uma pessoa")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Pesquisou por id e retornou uma pessoa"),
+            @ApiResponse(code = 401, message = "Você não está autorizado na aplicação"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
@@ -57,6 +58,7 @@ public class PessoaResource {
     @ApiOperation(value = "Cadastro de pessoa")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Cadastrou uma pessoa"),
+            @ApiResponse(code = 401, message = "Você não está autorizado na aplicação"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
@@ -70,6 +72,7 @@ public class PessoaResource {
     @ApiOperation(value = "Atualiza as informações de uma pessoa")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Atualizou uma pessoa"),
+            @ApiResponse(code = 401, message = "Você não está autorizado na aplicação"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
@@ -87,7 +90,8 @@ public class PessoaResource {
     @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Deleta uma pessoa")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Deletou uma pessoa "),
+            @ApiResponse(code = 204, message = "Deletou uma pessoa "),
+            @ApiResponse(code = 401, message = "Você não está autorizado na aplicação"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
@@ -97,7 +101,6 @@ public class PessoaResource {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada!");
         }
         service.deletePessoaById(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Pessoa deletada!");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Pessoa deletada!");
     }
-
 }

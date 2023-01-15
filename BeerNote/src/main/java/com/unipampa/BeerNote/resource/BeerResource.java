@@ -41,6 +41,7 @@ public class BeerResource {
         @ApiOperation(value = "Retorna uma Lista de cervejas")
         @ApiResponses(value = {
                 @ApiResponse(code = 200, message = "Retornou uma lista de cervejas"),
+                @ApiResponse(code = 401, message = "Deletou uma cerveja "),
                 @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
                 @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
         })
@@ -52,6 +53,7 @@ public class BeerResource {
         @ApiOperation(value = "Retorna uma cerveja")
         @ApiResponses(value = {
                 @ApiResponse(code = 200, message = "Pesquisou por id e retornou uma cerveja"),
+                @ApiResponse(code = 401, message = "Deletou uma cerveja "),
                 @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
                 @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
         })
@@ -63,6 +65,7 @@ public class BeerResource {
         @ApiOperation(value = "Cadastro de cerveja")
         @ApiResponses(value = {
                 @ApiResponse(code = 201, message = "Cadastrou uma cerveja"),
+                @ApiResponse(code = 401, message = "Deletou uma cerveja "),
                 @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
                 @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
         })
@@ -76,6 +79,7 @@ public class BeerResource {
         @ApiOperation(value = "Atualiza as informações de uma cerveja")
         @ApiResponses(value = {
                 @ApiResponse(code = 200, message = "Atualizou uma cerveja"),
+                @ApiResponse(code = 401, message = "Deletou uma cerveja "),
                 @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
                 @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
         })
@@ -95,7 +99,8 @@ public class BeerResource {
         @DeleteMapping(value = "/{id}")
         @ApiOperation(value = "Deleta uma cerveja por id")
         @ApiResponses(value = {
-                @ApiResponse(code = 200, message = "Deletou uma cerveja "),
+                @ApiResponse(code = 204, message = "Deletou uma cerveja "),
+                @ApiResponse(code = 401, message = "Deletou uma cerveja "),
                 @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
                 @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
         })
@@ -105,6 +110,6 @@ public class BeerResource {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cerveja não encontrada!");
                 }
                 beerService.deleteBeer(beer.get());
-                return ResponseEntity.status(HttpStatus.OK).body("Cerveja deletada com sucesso!");
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Cerveja deletada com sucesso!");
         }
 }

@@ -1,4 +1,4 @@
-package com.unipampa.evaluation.controller;
+package com.unipampa.evaluation.resource;
 
 import com.unipampa.evaluation.dto.EvaluationDto;
 import com.unipampa.evaluation.model.Beer;
@@ -23,7 +23,7 @@ import java.util.Optional;
 @RequestMapping("/evaluations")
 @CrossOrigin(origins = "*")
 @Api(value = "API REST evaluation")
-public class EvaluationController {
+public class EvaluationResource {
 
     @Autowired
     private EvaluationService service;
@@ -38,6 +38,7 @@ public class EvaluationController {
     @ApiOperation(value = "Faz uma avaliação de cervejas")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Cadastrou uma avaliação"),
+            @ApiResponse(code = 401, message = "Você não está autorizado na aplicação"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
