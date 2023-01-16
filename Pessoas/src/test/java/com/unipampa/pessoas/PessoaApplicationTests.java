@@ -1,4 +1,4 @@
-package com.unipampa.Pessoas;
+package com.unipampa.pessoas;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

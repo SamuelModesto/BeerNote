@@ -14,7 +14,7 @@ spring:
         - id: pessoas
           uri: lb://PESSOAS
           predicates:
-            - Path=/pessoas/**
+            - Path=/pessoa/**
         - id: evaluation
           uri: lb://EVALUATION
           predicates:

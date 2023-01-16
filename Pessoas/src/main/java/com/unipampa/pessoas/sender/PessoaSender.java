@@ -1,6 +1,6 @@
-package com.unipampa.Pessoas.sender;
+package com.unipampa.pessoas.sender;
 
-import com.unipampa.Pessoas.model.Pessoa;
+import com.unipampa.pessoas.model.Pessoa;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
