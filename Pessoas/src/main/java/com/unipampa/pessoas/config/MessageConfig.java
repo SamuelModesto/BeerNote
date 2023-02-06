@@ -1,4 +1,4 @@
-package com.unipampa.Pessoas.config;
+package com.unipampa.pessoas.config;
 
 import org.springframework.amqp.core.Exchange;
 import org.springframework.amqp.core.ExchangeBuilder;

@@ -1,4 +1,4 @@
-package com.unipampa.evaluation.controller;
+package com.unipampa.evaluation.resource;
 
 import com.unipampa.evaluation.dto.EvaluationDto;
 import com.unipampa.evaluation.model.Beer;
@@ -9,6 +9,8 @@ import com.unipampa.evaluation.service.EvaluationService;
 import com.unipampa.evaluation.service.PersonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +23,7 @@ import java.util.Optional;
 @RequestMapping("/evaluations")
 @CrossOrigin(origins = "*")
 @Api(value = "API REST evaluation")
-public class EvaluationController {
+public class EvaluationResource {
 
     @Autowired
     private EvaluationService service;
@@ -34,6 +36,12 @@ public class EvaluationController {
 
     @PostMapping("/register")
     @ApiOperation(value = "Faz uma avaliação de cervejas")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Cadastrou uma avaliação"),
+            @ApiResponse(code = 401, message = "Você não está autorizado na aplicação"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
     public ResponseEntity<Object> registerEvaluation(@RequestBody EvaluationDto dto) {
         var evaluation = new Evaluation();
         BeanUtils.copyProperties(dto, evaluation);
